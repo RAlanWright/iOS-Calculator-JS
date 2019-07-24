@@ -58,10 +58,20 @@ body {
 	background-color: #df974c;
 }
 
+.calc-button:last-child:hover {
+    background-color: #dfb07e;
+    color: white;
+} 
+
+.calc-button:last-child:active {
+    background-color: #dd8d37;
+} 
+
 .double {
-	width: 49.5%;
+	width: 49.7%;
 }
 
 .triple {
-	width: 74.5%;
+	width: 74.8%;
 }
+ 
