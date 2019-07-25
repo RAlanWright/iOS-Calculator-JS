@@ -10,5 +10,26 @@ function init() {
     });
 }
 
+function buttonClick(value) {
+    if (isNaN(parseInt(value))) {
+        handleSymbol(value);
+    } else {
+        handleNumber(value);
+    }
+}
+
+function handleNumber(value) {
+    if (buffer === "0") {
+        buffer = value;
+    } else {
+        buffer += value;
+    }
+}
+
+function handleSymbol(value) {
+
+}
+
+
 init();
 
