@@ -3,13 +3,6 @@ let runningTotal = 0;
 let previousOperator;
 const screen = document.querySelector(".screen");
 
-
-function init() {
-    document.querySelector(".calc-buttons").addEventListener("click", function(event) {
-        buttonClick(event.target.innerText);
-    });
-}
-
 function buttonClick(value) {
     if (isNaN(parseInt(value))) {
         handleSymbol(value);
@@ -25,7 +18,6 @@ function handleNumber(value) {
     } else {
         buffer += value;
     }
-    
 }
 
 function handleSymbol(value) {
@@ -54,12 +46,41 @@ function handleSymbol(value) {
         default:
             handleMath(value);
     }
+}
 
+function handleMath(value) {
+    const intBuffer = parseInt(buffer);
+    if (runningTotal === 0) {
+        runningTotal = intBuffer;
+    } else {
+        flushOperation(intBuffer);
+    }
     
+    previousOperator = value;
+
+    buffer = "0";
+}
+
+function flushOperation(intBuffer) {
+    if (previousOperator === "+") {
+        runningTotal += intBuffer;
+    } else if (previousOperator === "-") {
+        runningTotal -= intBuffer;
+    } else if (previousOperator === "×") {
+        runningTotal *= intBuffer;
+    } else {
+        runningTotal /= intBuffer;
+    }
 }
 
 function rerender() {
     screen.innerText = buffer;
+}
+
+function init() {
+    document.querySelector(".calc-buttons").addEventListener("click", function(event) {
+        buttonClick(event.target.innerText);
+    });
 }
 
 init();
