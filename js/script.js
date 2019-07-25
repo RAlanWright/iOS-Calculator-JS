@@ -33,7 +33,7 @@ function handleSymbol(value) {
             }
             flushOperation(parseInt(buffer));
             previousOperator = null;
-            buffer = runningTotal;
+            buffer = +runningTotal;
             runningTotal = 0;
             break;
         case "←":
@@ -45,17 +45,22 @@ function handleSymbol(value) {
             break;
         default:
             handleMath(value);
+            break;
     }
 }
 
 function handleMath(value) {
+    if (buffer === "0") {
+        return;
+    }
+
     const intBuffer = parseInt(buffer);
     if (runningTotal === 0) {
         runningTotal = intBuffer;
     } else {
         flushOperation(intBuffer);
     }
-    
+
     previousOperator = value;
 
     buffer = "0";
